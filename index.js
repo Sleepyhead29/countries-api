@@ -28,40 +28,75 @@ function getInfo(img, country, pop, reg, cap) {
 }
 
 function createCards(img, country, pop, reg, cap) {
-    //Create country card
+    //Create HTML elements
     let countryCard = document.createElement("div");
     let countryInfo = document.createElement("div");
     let countryCardName = document.createElement("h3");
-    let countryFlagContainer = document.createElement("img");
+    let countryImg = document.createElement("div");
+    countryImg.setAttribute("id", "country-img");
 
-    let populationHolder = document.createElement("h4");
-    let regionHolder = document.createElement("h4");
-    let captalHolder = document.createElement("h4");
-    countryFlagContainer.setAttribute("src", img);
-    //Create text
+    let populationWord= document.createElement("h4");
+    let regionWord = document.createElement("h4");
+    let capitalWord = document.createElement("h4");
+
+    
+
+    //Create span for text in card
+    let populationHolder = document.createElement("span");
+    let regionHolder = document.createElement("span");
+    let capitalHolder = document.createElement("span");
+
+    //Append span to H4
+    //Create values as textnodes
     let countryText = document.createTextNode(country)
-    let populationText = document.createTextNode(`Population: ${pop}`)
-    let regionText = document.createTextNode(`Region: ${reg}`)
-    let capitalText = document.createTextNode(`Capital: ${cap}`)
-    //let flagText = document.createTextNode(img);
-    //Append child & Set Attribute
-    countryCard.appendChild(countryFlagContainer);
-    countryCardName.appendChild(countryText);
-    countryCard.appendChild(countryCardName);
+    let populationText = document.createTextNode(`${pop}`)
+    let regionText = document.createTextNode(`${reg}`)
+    let capitalText = document.createTextNode(`${cap}`)
 
-    //Country Info
+    
+
+
+    //Put values in span
     populationHolder.appendChild(populationText)
     regionHolder.appendChild(regionText)
-    captalHolder.appendChild(capitalText)
+    capitalHolder.appendChild(capitalText)
+
+
+    //Create text
+    let populationWordText = document.createTextNode("Population: ");
+    let regionWordText = document.createTextNode("Region: ");
+    let capitalWordText = document.createTextNode("Capital: ");
+
+    
+    
+
+    //append text nodes to H4
+    populationWord.appendChild(populationWordText);
+    regionWord.appendChild(regionWordText);
+    capitalWord.appendChild(capitalWordText);
+
+    //Append spans to H4
+    populationWord.appendChild(populationHolder);
+    regionWord.appendChild(regionHolder);
+    capitalWord.appendChild(capitalHolder);
+    //Append child & Set Attribute
+
+    countryCardName.appendChild(countryText);
+    countryInfo.appendChild(countryCardName);
+
+
+    //Country Info
+    
 
     //Append all to country card
-
-    countryInfo.appendChild(populationHolder);
-    countryInfo.appendChild(regionHolder);
-    countryInfo.appendChild(captalHolder);
+    countryCard.appendChild(countryImg);
+    countryInfo.appendChild(populationWord);
+    countryInfo.appendChild(regionWord);
+    countryInfo.appendChild(capitalWord);
     countryInfo.setAttribute("id", "country-info");
     countryCard.appendChild(countryInfo);
     countryCard.setAttribute("id", "country-card");
+    countryImg.style.backgroundImage = `url(${img})`;
 
     cardsContainer.appendChild(countryCard);
 }
