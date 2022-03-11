@@ -2,9 +2,11 @@
 let inpuField = document.getElementById("inputField");
 let cardsContainer = document.getElementById("card-containers");
 let isDisplayed = false;
-let countryCard = document.createElement("div");
+//let countryCard = document.createElement("div");
+let countryCard = document.getElementById("country-card")
 let activeClass = document.getElementsByClassName("active")
 inpuField.addEventListener("focusout", getApi);
+
 
 
 async function getApi() {
@@ -13,8 +15,7 @@ async function getApi() {
     let data = await response.json();
 
     let countryCards = Array.from(activeClass);
-    
-    
+
 
     data.forEach(element => {
 
@@ -25,17 +26,22 @@ async function getApi() {
 
 
         countryCards.forEach(card => {
+
             countryCard.classList.add("active");
             if (card.classList.contains("active")) {
                 card.remove();
             }
         })
-    
+
         getInfo(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
 
         createCards(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
 
+        countryCard.addEventListener("click", getExtra);
 
+        function getExtra() {
+            window.location = "extra.html";
+        }
 
     });
 
@@ -63,6 +69,7 @@ function createCards(img, country, pop, reg, cap) {
     let countryInfo = document.createElement("div");
     let countryCardName = document.createElement("h3");
     let countryImg = document.createElement("div");
+    let link = document.createElement("a");
     countryImg.setAttribute("id", "country-img");
 
     let populationWord = document.createElement("h4");
@@ -125,7 +132,7 @@ function createCards(img, country, pop, reg, cap) {
     countryCard.setAttribute("id", "country-card");
     countryImg.style.backgroundImage = `url(${img})`;
     countryCard.setAttribute("class", "active");
+    countryCard.appendChild(link)
 
     cardsContainer.appendChild(countryCard);
 }
-

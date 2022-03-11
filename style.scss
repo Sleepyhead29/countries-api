@@ -116,3 +116,20 @@ header {
         }
     }
 }
+
+
+/*Extra Page*/
+#flag-container{
+    position: absolute;
+    top: 20%;
+    left: 4%;
+    width: 90%;
+    height: 15em;
+    border: 1px solid blue;
+}
+
+#back-button{
+    position: absolute;
+    top: 13%;
+    left: 3%;
+}
