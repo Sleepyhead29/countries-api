@@ -3,6 +3,8 @@ let inpuField = document.getElementById("inputField");
 let cardsContainer = document.getElementById("card-containers");
 let countryCard = document.getElementById("country-card")
 let activeClass = document.getElementsByClassName("active")
+let extraPage = document.getElementById("extra-page");
+let flagContainer = document.getElementById("flag-container");
 
 //<-------- EVENT LISTENERS -------->
 inpuField.addEventListener("focusout", getApi);
@@ -12,7 +14,6 @@ async function getApi() {
 
     let response = await fetch(`https://restcountries.com/v3.1/name/${inpuField.value}`)
     let data = await response.json();
-
     let countryCards = Array.from(activeClass);
 
 
@@ -20,22 +21,38 @@ async function getApi() {
 
         let indexNb = data.indexOf(element)
         console.log(data[indexNb]);
+        console.log(indexNb);
 
-        countryCards.forEach(card => {
+        createCards(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
+
+        for (card of countryCards) {
 
             countryCard.classList.add("active");
             if (card.classList.contains("active")) {
                 card.remove();
             }
-        })
+        }
 
-        createCards(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
+        countryCard.addEventListener("click", makeExtraPage)
+
+        function makeExtraPage() {
+            extraPage.style.display = "block";
+            extraPage.style.border = "1px solid black";
+        }
 
     });
+
+
 
     return data;
 }
 
+
+/*for (card of activeClass) {
+    let cardPos = activeClass.item(0);
+    let arrayCard = Array.from(activeClass)
+    card.addEventListener("click", () => console.log(arrayCard.indexOf(this)));
+}*/
 
 function createCards(img, country, pop, reg, cap) {
 
@@ -86,9 +103,9 @@ function createCards(img, country, pop, reg, cap) {
     populationWord.appendChild(populationHolder);
     regionWord.appendChild(regionHolder);
     capitalWord.appendChild(capitalHolder);
-   
-   
-   
+
+
+
     //Append child
     countryCardName.appendChild(countryText);
     countryInfo.appendChild(countryCardName);

@@ -118,7 +118,16 @@ header {
 }
 
 
+
 /*Extra Page*/
+#extra-page{
+    display: none;
+    width: 100vw;
+    height: 90vh;
+    position: absolute;
+    top: 10vh;
+    background-color: white;
+}
 #flag-container{
     position: absolute;
     top: 20%;
@@ -130,6 +139,6 @@ header {
 
 #back-button{
     position: absolute;
-    top: 13%;
+    top: 5%;
     left: 3%;
 }
