@@ -5,6 +5,8 @@ let countryCard = document.getElementById("country-card")
 let activeClass = document.getElementsByClassName("active")
 let extraPage = document.getElementById("extra-page");
 let flagContainer = document.getElementById("flag-container");
+let backBtn = document.getElementById("back-button");
+let basicInfo = document.getElementById("basic-info");
 
 //<-------- EVENT LISTENERS -------->
 inpuField.addEventListener("focusout", getApi);
@@ -34,10 +36,13 @@ async function getApi() {
         }
 
         countryCard.addEventListener("click", makeExtraPage)
+        backBtn.addEventListener("click", () => {
+            extraPage.style.display = "none";
+        })
 
         function makeExtraPage() {
-            extraPage.style.display = "block";
-            extraPage.style.border = "1px solid black";
+            extraPage.style.display = "flex";
+            flagContainer.style.backgroundImage = `url('${data[indexNb].flags.svg}')`;
         }
 
     });
@@ -47,12 +52,6 @@ async function getApi() {
     return data;
 }
 
-
-/*for (card of activeClass) {
-    let cardPos = activeClass.item(0);
-    let arrayCard = Array.from(activeClass)
-    card.addEventListener("click", () => console.log(arrayCard.indexOf(this)));
-}*/
 
 function createCards(img, country, pop, reg, cap) {
 
