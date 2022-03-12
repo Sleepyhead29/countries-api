@@ -6,7 +6,7 @@ let activeClass = document.getElementsByClassName("active")
 let extraPage = document.getElementById("extra-page");
 let flagContainer = document.getElementById("flag-container");
 let backBtn = document.getElementById("back-button");
-let basicInfo = document.getElementById("basic-info");
+let countryTitle = document.querySelector("h2");
 
 //<-------- EVENT LISTENERS -------->
 inpuField.addEventListener("focusout", getApi);
@@ -38,11 +38,22 @@ async function getApi() {
         countryCard.addEventListener("click", makeExtraPage)
         backBtn.addEventListener("click", () => {
             extraPage.style.display = "none";
+            let basicInfo = document.getElementById("basic-info");
+            basicInfo.remove();
+
         })
 
         function makeExtraPage() {
             extraPage.style.display = "flex";
             flagContainer.style.backgroundImage = `url('${data[indexNb].flags.svg}')`;
+            countryTitle.innerHTML = data[indexNb].name.common;
+
+            //Store currency name inside a variable. I can't manually access it since Idk the currency name of each country.                                                /*Accessed the proprety through the new proprety name variable*/
+            let currencyName = Object.keys(data[indexNb].currencies);
+            createInfo(data[indexNb].name.official, data[indexNb].population, data[indexNb].region, data[indexNb].subregion, data[indexNb].capital[0], data[indexNb].tld[0], data[indexNb].currencies[currencyName].name, Object.values(data[indexNb].languages));
+
+
+
         }
 
     });
@@ -64,7 +75,7 @@ function createCards(img, country, pop, reg, cap) {
     let populationWord = document.createElement("h4");
     let regionWord = document.createElement("h4");
     let capitalWord = document.createElement("h4");
-
+    let link = document.createElement("a");
 
     //Create span for API values in card
     let populationHolder = document.createElement("span");
@@ -125,7 +136,86 @@ function createCards(img, country, pop, reg, cap) {
 }
 
 
+function createInfo(native, pop, reg, subReg, cap, dom, cur, lang) {
+    //Connect HTML elements
+    let basicInfo = document.createElement("div");
+    basicInfo.setAttribute("id", "basic-info");
+    let info2 = document.createElement("div");
+    info2.setAttribute("id", "info2");
+    //Create HTML elements
+    let nativeName = document.createElement("h4");
+    let population = document.createElement("h4");
+    let region = document.createElement("h4");
+    let subRegion = document.createElement("h4");
+    let capital = document.createElement("h4");
+    let domain = document.createElement("h4");
+    let currencies = document.createElement("h4");
+    let languages = document.createElement("h4");
 
+    //Create text for H4 Elements
+    nativeName.innerHTML = "Official Name: ";
+    population.innerHTML = "Population: ";
+    region.innerHTML = "Region: ";
+    subRegion.innerHTML = "Sub Region : ";
+    capital.innerHTML = "Capital: ";
+    domain.innerHTML = "Top Level Domain: ";
+    currencies.innerHTML = "Currencies: ";
+    languages.innerHTML = "Languages: ";
+
+    //Create Spans for API data
+    let nativeNameHolder = document.createElement("span");
+    let populationHolder = document.createElement("span");
+    let regionHolder = document.createElement("span");
+    let subRegionHolder = document.createElement("span");
+    let capitalHolder = document.createElement("span");
+    let domainHolder = document.createElement("span");
+    let currenciesHolder = document.createElement("span");
+    let languagesHolder = document.createElement("span");
+
+
+    //Create TextNodes with API Data
+    nativeNameNode = document.createTextNode(native);
+    populationNode = document.createTextNode(pop);
+    regionNode = document.createTextNode(reg);
+    subRegionNode = document.createTextNode(subReg);
+    capitalNode = document.createTextNode(cap);
+    domainNode = document.createTextNode(dom);
+    currenciesNode = document.createTextNode(cur);
+    languagesNode = document.createTextNode(lang);
+
+    //Append API data into Span elements
+    nativeNameHolder.appendChild(nativeNameNode);
+    populationHolder.appendChild(populationNode);
+    regionHolder.appendChild(regionNode);
+    subRegionHolder.appendChild(subRegionNode);
+    capitalHolder.appendChild(capitalNode);
+    domainHolder.appendChild(domainNode);
+    currenciesHolder.appendChild(currenciesNode);
+    languagesHolder.appendChild(languagesNode);
+
+    //Append Span to H4
+    nativeName.appendChild(nativeNameHolder);
+    population.appendChild(populationHolder);
+    region.appendChild(regionHolder);
+    subRegion.appendChild(subRegionHolder);
+    capital.appendChild(capitalHolder);
+    domain.appendChild(domainHolder);
+    currencies.appendChild(currenciesHolder);
+    languages.appendChild(languagesHolder);
+
+    //Append H4 elements to parent container
+    extraPage.appendChild(basicInfo);
+    basicInfo.appendChild(nativeName);
+    basicInfo.appendChild(population);
+    basicInfo.appendChild(region);
+    basicInfo.appendChild(subRegion);
+    basicInfo.appendChild(capital);
+    basicInfo.appendChild(info2);
+    info2.appendChild(domain);
+    info2.appendChild(currencies);
+    info2.appendChild(languages);
+
+}
 
 
 
