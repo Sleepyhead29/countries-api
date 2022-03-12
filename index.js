@@ -1,12 +1,11 @@
 //<-------- VARIABLES -------->
 let inpuField = document.getElementById("inputField");
 let cardsContainer = document.getElementById("card-containers");
-let isDisplayed = false;
-//let countryCard = document.createElement("div");
 let countryCard = document.getElementById("country-card")
 let activeClass = document.getElementsByClassName("active")
-inpuField.addEventListener("focusout", getApi);
 
+//<-------- EVENT LISTENERS -------->
+inpuField.addEventListener("focusout", getApi);
 
 
 async function getApi() {
@@ -22,9 +21,6 @@ async function getApi() {
         let indexNb = data.indexOf(element)
         console.log(data[indexNb]);
 
-        isDisplayed = true;
-
-
         countryCards.forEach(card => {
 
             countryCard.classList.add("active");
@@ -33,51 +29,28 @@ async function getApi() {
             }
         })
 
-        getInfo(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
-
         createCards(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
-
-        countryCard.addEventListener("click", getExtra);
-
-        function getExtra() {
-            window.location = "extra.html";
-        }
 
     });
 
     return data;
 }
 
-function getInfo(img, country, pop, reg, cap) {
-    let flag = img
-    let countryName = country;
-    let population = pop;
-    let region = reg;
-    let capital = cap;
-    console.log(countryName, population, region, capital);
-
-
-
-}
 
 function createCards(img, country, pop, reg, cap) {
 
-
     //Create HTML elements
-
     countryCard = document.createElement("div");
     let countryInfo = document.createElement("div");
     let countryCardName = document.createElement("h3");
     let countryImg = document.createElement("div");
-    let link = document.createElement("a");
-    countryImg.setAttribute("id", "country-img");
-
+    countryImg.setAttribute("id", "country-img"); //Set ID for Country Image
     let populationWord = document.createElement("h4");
     let regionWord = document.createElement("h4");
     let capitalWord = document.createElement("h4");
 
 
-    //Create span for text in card
+    //Create span for API values in card
     let populationHolder = document.createElement("span");
     let regionHolder = document.createElement("span");
     let capitalHolder = document.createElement("span");
@@ -113,13 +86,13 @@ function createCards(img, country, pop, reg, cap) {
     populationWord.appendChild(populationHolder);
     regionWord.appendChild(regionHolder);
     capitalWord.appendChild(capitalHolder);
-    //Append child & Set Attribute
-
+   
+   
+   
+    //Append child
     countryCardName.appendChild(countryText);
     countryInfo.appendChild(countryCardName);
 
-
-    //Country Info
 
 
     //Append all to country card
@@ -132,7 +105,32 @@ function createCards(img, country, pop, reg, cap) {
     countryCard.setAttribute("id", "country-card");
     countryImg.style.backgroundImage = `url(${img})`;
     countryCard.setAttribute("class", "active");
-    countryCard.appendChild(link)
-
     cardsContainer.appendChild(countryCard);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function getInfo(img, country, pop, reg, cap) {
+    let flag = img
+    let countryName = country;
+    let population = pop;
+    let region = reg;
+    let capital = cap;
+    console.log(countryName, population, region, capital);
+
+}
+ getInfo(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
+*/
