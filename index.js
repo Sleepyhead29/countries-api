@@ -6,7 +6,8 @@ let activeClass = document.getElementsByClassName("active")
 let extraPage = document.getElementById("extra-page");
 let flagContainer = document.getElementById("flag-container");
 let backBtn = document.getElementById("back-button");
-let countryTitle = document.querySelector("h2");
+let countryTitle = document.createElement("h2");
+countryTitle.setAttribute("id", "country-title");
 
 //<-------- EVENT LISTENERS -------->
 inpuField.addEventListener("focusout", getApi);
@@ -40,6 +41,7 @@ async function getApi() {
             extraPage.style.display = "none";
             let basicInfo = document.getElementById("basic-info");
             basicInfo.remove();
+            info2.remove();
 
         })
 
@@ -142,6 +144,7 @@ function createInfo(native, pop, reg, subReg, cap, dom, cur, lang) {
     basicInfo.setAttribute("id", "basic-info");
     let info2 = document.createElement("div");
     info2.setAttribute("id", "info2");
+    let content = document.getElementById("content");
     //Create HTML elements
     let nativeName = document.createElement("h4");
     let population = document.createElement("h4");
@@ -204,13 +207,15 @@ function createInfo(native, pop, reg, subReg, cap, dom, cur, lang) {
     languages.appendChild(languagesHolder);
 
     //Append H4 elements to parent container
-    extraPage.appendChild(basicInfo);
+    extraPage.appendChild(content);
+    content.appendChild(basicInfo);
+    content.appendChild(info2);
+    basicInfo.append(countryTitle);
     basicInfo.appendChild(nativeName);
     basicInfo.appendChild(population);
     basicInfo.appendChild(region);
     basicInfo.appendChild(subRegion);
     basicInfo.appendChild(capital);
-    basicInfo.appendChild(info2);
     info2.appendChild(domain);
     info2.appendChild(currencies);
     info2.appendChild(languages);
