@@ -11,6 +11,11 @@ countryTitle.setAttribute("id", "country-title");
 let option = document.querySelector('select');
 //<-------- EVENT LISTENERS -------->
 inpuField.addEventListener("focusout", getApi);
+document.addEventListener("keydown",(e) =>{
+if(e.key == "Enter"){
+    getApi();
+}
+});
 
 
 async function getApi() {
