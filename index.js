@@ -1,14 +1,14 @@
 //<-------- VARIABLES -------->
 let inpuField = document.getElementById("inputField");
 let cardsContainer = document.getElementById("card-containers");
-let countryCard = document.getElementById("country-card")
+//let countryCard = document.getElementById("country-card")
 let activeClass = document.getElementsByClassName("active")
 let extraPage = document.getElementById("extra-page");
 let flagContainer = document.getElementById("flag-container");
 let backBtn = document.getElementById("back-button");
 let countryTitle = document.createElement("h2");
 countryTitle.setAttribute("id", "country-title");
-
+let option = document.querySelector('select');
 //<-------- EVENT LISTENERS -------->
 inpuField.addEventListener("focusout", getApi);
 
@@ -19,8 +19,7 @@ async function getApi() {
         let response = await fetch(`https://restcountries.com/v3.1/name/${inpuField.value}`)
         let data = await response.json();
         let countryCards = Array.from(activeClass);
-
-
+      
         data.forEach(element => {
 
             let indexNb = data.indexOf(element)
@@ -59,23 +58,18 @@ async function getApi() {
                 let currencyName = Object.keys(data[indexNb].currencies);
                 console.log(Object.values(data[indexNb].currencies))
                 console.log(currencyName);
+                createInfo(data[indexNb].name.official, data[indexNb].population, data[indexNb].region, data[indexNb].subregion, data[indexNb].capital[0], data[indexNb].tld[0], data[indexNb].currencies[currencyName[0]].name, Object.values(data[indexNb].languages));
 
-                    createInfo(data[indexNb].name.official, data[indexNb].population, data[indexNb].region, data[indexNb].subregion, data[indexNb].capital[0], data[indexNb].tld[0], data[indexNb].currencies[currencyName[0]].name, Object.values(data[indexNb].languages));
-
-                
 
             }
 
         });
-
-
 
         return data;
     } catch (error) {
         console.log(error);
     }
 }
-
 
 function createCards(img, country, pop, reg, cap) {
 
