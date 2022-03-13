@@ -15,54 +15,65 @@ inpuField.addEventListener("focusout", getApi);
 
 async function getApi() {
 
-    let response = await fetch(`https://restcountries.com/v3.1/name/${inpuField.value}`)
-    let data = await response.json();
-    let countryCards = Array.from(activeClass);
+    try {
+        let response = await fetch(`https://restcountries.com/v3.1/name/${inpuField.value}`)
+        let data = await response.json();
+        let countryCards = Array.from(activeClass);
 
 
-    data.forEach(element => {
+        data.forEach(element => {
 
-        let indexNb = data.indexOf(element)
-        console.log(data[indexNb]);
-        console.log(indexNb);
+            let indexNb = data.indexOf(element)
+            console.log(data[indexNb]);
+            console.log(indexNb);
 
-        createCards(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
+            if (data[indexNb].hasOwnProperty('capital') == false) {
+                data[indexNb].capital = "None";
+            } else {
+                createCards(data[indexNb].flags.svg, data[indexNb].name.common, data[indexNb].population, data[indexNb].region, data[indexNb].capital[0]);
 
-        for (card of countryCards) {
-
-            countryCard.classList.add("active");
-            if (card.classList.contains("active")) {
-                card.remove();
             }
-        }
+            for (card of countryCards) {
 
-        countryCard.addEventListener("click", makeExtraPage)
-        backBtn.addEventListener("click", () => {
-            extraPage.style.display = "none";
-            let basicInfo = document.getElementById("basic-info");
-            basicInfo.remove();
-            info2.remove();
+                countryCard.classList.add("active");
+                if (card.classList.contains("active")) {
+                    card.remove();
+                }
+            }
 
-        })
+            countryCard.addEventListener("click", makeExtraPage)
+            backBtn.addEventListener("click", () => {
+                extraPage.style.display = "none";
+                let basicInfo = document.getElementById("basic-info");
+                basicInfo.remove();
+                info2.remove();
 
-        function makeExtraPage() {
-            extraPage.style.display = "flex";
-            flagContainer.style.backgroundImage = `url('${data[indexNb].flags.svg}')`;
-            countryTitle.innerHTML = data[indexNb].name.common;
+            })
 
-            //Store currency name inside a variable. I can't manually access it since Idk the currency name of each country.                                                /*Accessed the proprety through the new proprety name variable*/
-            let currencyName = Object.keys(data[indexNb].currencies);
-            createInfo(data[indexNb].name.official, data[indexNb].population, data[indexNb].region, data[indexNb].subregion, data[indexNb].capital[0], data[indexNb].tld[0], data[indexNb].currencies[currencyName].name, Object.values(data[indexNb].languages));
+            function makeExtraPage() {
+                extraPage.style.display = "flex";
+                flagContainer.style.backgroundImage = `url('${data[indexNb].flags.svg}')`;
+                countryTitle.innerHTML = data[indexNb].name.common;
+
+                //Store currency name inside a variable. I can't manually access it since Idk the currency name of each country.                                                /*Accessed the proprety through the new proprety name variable*/
+                let currencyName = Object.keys(data[indexNb].currencies);
+                console.log(Object.values(data[indexNb].currencies))
+                console.log(currencyName);
+
+                    createInfo(data[indexNb].name.official, data[indexNb].population, data[indexNb].region, data[indexNb].subregion, data[indexNb].capital[0], data[indexNb].tld[0], data[indexNb].currencies[currencyName[0]].name, Object.values(data[indexNb].languages));
+
+                
+
+            }
+
+        });
 
 
 
-        }
-
-    });
-
-
-
-    return data;
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
