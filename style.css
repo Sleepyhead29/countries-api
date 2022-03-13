@@ -1,0 +1,244 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Nunito Sans";
+}
+
+body {
+  background-color: #fafafa;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 10vh;
+  background-color: white;
+  box-shadow: 1px 1px 2px #858585;
+  z-index: 2;
+}
+header h3,
+header h4 {
+  padding: 20px;
+  color: black;
+}
+header a {
+  text-decoration: none;
+}
+
+#search-area {
+  width: 90%;
+  height: 16vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 30px auto;
+}
+#search-area input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  box-shadow: 1px 1px 5px #858585;
+  padding-left: 7px;
+}
+#search-area select {
+  margin-top: 10px;
+  width: 50%;
+  height: 50px;
+  border-style: none;
+  border-radius: 3%;
+  box-shadow: 1px 1px 5px #858585;
+  padding-left: 10px;
+}
+
+#card-containers {
+  width: 90%;
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#country-card:last-child {
+  margin-bottom: 4em;
+}
+
+#country-card {
+  margin-top: 3em;
+  width: 80%;
+  height: 24em;
+  background-color: white;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 3%;
+  box-shadow: 1px 1px 3px #858585;
+}
+#country-card #country-img {
+  width: 100%;
+  height: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 3% 3% 0 0;
+  margin: 0 auto;
+}
+#country-card #country-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 50%;
+  width: 100%;
+  padding-left: 20px;
+}
+#country-card #country-info h3 {
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+#country-card #country-info h4 {
+  font-weight: bold;
+  line-height: 1.5em;
+}
+#country-card #country-info span {
+  font-weight: 400;
+}
+
+#country-card:hover {
+  cursor: pointer;
+}
+
+/*Extra Page*/
+#extra-page {
+  display: none;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: #fafafa;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#back-button {
+  height: 30px;
+  width: 100px;
+  position: absolute;
+  top: 4%;
+  left: 5%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #858585;
+}
+
+#flag-container {
+  position: absolute;
+  top: 12%;
+  left: 4%;
+  width: 90%;
+  height: 13em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 3%;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 6%;
+}
+
+#content {
+  width: 90%;
+  height: 57%;
+  line-height: 2em;
+}
+#content span {
+  font-weight: 400;
+}
+
+#basic-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#info2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 35%;
+  justify-content: center;
+}
+
+#border-countries {
+  width: 100%;
+  border: 1px solid greenyellow;
+  height: 100px;
+}
+
+/*Big Screen*/
+@media screen and (min-width: 1440px) {
+  #search-area {
+    width: 83%;
+    height: 11vh;
+    flex-direction: row;
+    align-items: flex-end;
+    margin: 0 auto;
+  }
+  #search-area input {
+    width: 30%;
+  }
+  #search-area select {
+    width: 12%;
+  }
+
+  #card-containers {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3%;
+  }
+
+  #country-card {
+    width: 20%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+  #country-card #country-img {
+    background-repeat: no-repeat;
+  }
+
+  #country-card:last-child {
+    margin-bottom: 0px;
+  }
+
+  /*Extra Page*/
+  #extra-page {
+    flex-direction: row;
+  }
+  #extra-page #flag-container {
+    top: 25%;
+    width: 50%;
+    height: 40%;
+  }
+  #extra-page h2 {
+    margin-bottom: 10%;
+  }
+  #extra-page #content {
+    display: flex;
+    height: 50%;
+    width: 40%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  #extra-page #info2 {
+    height: 57%;
+    width: 50%;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
